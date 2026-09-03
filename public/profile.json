@@ -1,0 +1,16 @@
+{
+    "name": "Travis Abuton",
+    "email": "abutontravis1@gmail.com",
+    "phone": "123-456-7890",
+    "title": "Full Stack Developer",
+    "socials": [
+        {
+            "platform": "LinkedIn",
+            "url": "https://www.linkedin.com/in/travis-abuton/"
+        },
+        {
+            "platform": "GitHub",
+            "url": "https://github.com/sundazekiks"
+        }
+    ]
+}
