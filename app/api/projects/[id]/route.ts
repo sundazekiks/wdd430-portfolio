@@ -3,7 +3,7 @@ import { getProjectById } from "@/lib/project-db";
 import { AppError } from "@/lib/errors/AppError";
 import { ErrorNormalizer } from "@/lib/errors/ErrorNormalizer";
 
-export async function GET(request: Request, { params }: { params: { id: string } }) {
+export async function GET(request: Request, { params }: { params: Promise<{ id: string }> }) {
     try {
 
         const { id } = await params;
