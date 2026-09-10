@@ -1,6 +1,4 @@
-import { ContactCard } from '@/components/ContactCard';
-import profile from '@/public/profile.json';
-import { type ContactCardProps } from '@/components/ContactCard';
+
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -16,7 +14,6 @@ export default function About() {
             <p className="text-lg text-gray-700">
                 This about page shares more information about my background and work.
             </p>
-            <ContactCard {...(profile as ContactCardProps)} />
         </main>
     );
 }
