@@ -8,7 +8,7 @@ export async function GET(request: Request) {
         // Get query parameters from the request URL
         const url = new URL(request.url);
         const type = url.searchParams.get("type");
-        const projects = getProjects(type);
+        const projects = await getProjects(type);
         return NextResponse.json(projects);
 
     } catch (err) {

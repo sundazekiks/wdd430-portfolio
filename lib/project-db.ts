@@ -1,3 +1,6 @@
+import { AppError } from "./errors/AppError";
+import { sql } from "./psql/sql";
+
 // lib/projects-db.ts
 export interface Project {
     id: number;
@@ -26,11 +29,25 @@ export const projects: Project[] = [
     }
 ];
 
-export function getProjects(type?: string | null): Project[] {
-    if (type) return projects.filter(p => p.type === type);
+export async function getProjects(type?: string | null): Promise<Project[]> {
+    let projects: Project[] = []
+    // TODO: re write this to another file 
+    if (type) {
+        projects = await sql`SELECT * 
+        FROM portfolio.projects 
+        WHERE type = ${type} ORDER BY id` as Project[] // FIX: potential error
+        return projects;
+    }
+    projects = await sql`SELECT * FROM portfolio.projects` as Project[]
     return projects;
 }
 
-export function getProjectById(id: number): Project | null {
-    return projects.find(p => p.id === id) ?? null;
+export async function getProjectById(id: number): Promise<Project | null> {
+    // return projects.find(p => p.id === id) ?? null;
+    // TODO: fix this, organize this
+    const project = await sql`SELECT *
+    FROM portfolio.projects
+    WHERE id = ${id}` as Project[]
+    if (project.length < 1) throw new AppError("Project doesn't exist", 404);
+    return project[0] ?? null;
 }

@@ -1,8 +1,9 @@
 "use client"
+import { Project } from "@/lib/project-db";
 import { useState } from "react";
 
 export function useProjects() {
-    const [projects, setProjects] = useState<[]>([]);
+    const [projects, setProjects] = useState<Project[] | []>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
     const fetchProjects = async (type: string | null) => {
@@ -14,6 +15,7 @@ export function useProjects() {
                 throw new Error(`Error fetching projects: ${response.statusText}`);
             }
             const data = await response.json();
+            console.log(data)
             setProjects(data);
         } catch (error) {
             console.error(error);
