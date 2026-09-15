@@ -7,9 +7,11 @@ export async function GET(request: Request, { params }: { params: Promise<{ id: 
     try {
 
         const { id } = await params;
-        const numericId = parseInt(id, 10);
-        console.log("Fetching project with ID:", numericId);
-        const project = getProjectById(numericId);
+        const numericId = Number(id);
+
+        console.log(Number.isNaN(numericId))
+        if (Number.isNaN(numericId)) throw new AppError("Invalid ID", 400) // a check if an id is valid
+        const project = await getProjectById(numericId);
 
         // using a custom error class to throw an error if the project is not found
         if (!project) throw new AppError(`Project with the specified ID not found`, 404);
